@@ -29,13 +29,9 @@ def task_create(data):
             description=description
         )
 
-        return {
-            "message": "Task created successfully.",
-            "task_id": task.id,
-            "name": task.name,
-            "description": task.description
-        }
+        return task
 
+       
     except ValidationError as ve:
         raise ve
     except Exception as e:

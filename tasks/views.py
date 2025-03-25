@@ -34,7 +34,7 @@ class TaskCreateApi(APIView):
         try:
             task = task_create(request.data)
             serializer = TaskSerializer(task)
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+            return Response({"success":True,"data":serializer.data}, status=status.HTTP_201_CREATED)
         except Exception as e:
             logger.error(f"Task creation failed: {str(e)}")
             return Response({"error": e.detail}, status=status.HTTP_400_BAD_REQUEST)
@@ -79,7 +79,7 @@ class TaskUserWise(APIView):
     """
 
     class Pagination(LimitOffsetPagination):
-        default_limit = 1
+        default_limit = 50
 
     def get(self, request, user_id):
         try:
